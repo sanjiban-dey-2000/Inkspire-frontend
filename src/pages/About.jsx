@@ -44,8 +44,8 @@ const About = () => {
               <p className="text-gray-400 mb-3">Founder & Full-Stack Developer</p>
               <div className="flex justify-center gap-4 text-gray-400">
                 <a href="https://www.linkedin.com/in/sanjibandey2000" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-400"><FaLinkedin /></a>
-                <a href="#" className="hover:text-indigo-400"><FaTwitter /></a>
-                <a href="#" className="hover:text-indigo-400"><FaGithub /></a>
+                <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-400"><FaTwitter /></a>
+                <a href="https://github.com/sanjiban-dey-2000" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-400"><FaGithub /></a>
               </div>
             </div>
 
@@ -59,8 +59,8 @@ const About = () => {
               <h3 className="text-xl font-bold mb-2">Abir Das</h3>
               <p className="text-gray-400 mb-3">Finance & Analytics Expert</p>
               <div className="flex justify-center gap-4 text-gray-400">
-                <a href="https://www.linkedin.com/in/abir-das-212918183" className="hover:text-indigo-400"><FaLinkedin /></a>
-                <a href="https://x.com/AbirDas1211233?t=ihbnWWOm5awY6gu60hp61g&s=08" className="hover:text-indigo-400"><FaTwitter /></a>
+                <a href="https://www.linkedin.com/in/abir-das-212918183" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-400"><FaLinkedin /></a>
+                <a href="https://x.com/AbirDas1211233?t=ihbnWWOm5awY6gu60hp61g&s=08" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-400"><FaTwitter /></a>
               </div>
             </div>
 
@@ -74,8 +74,8 @@ const About = () => {
               <h3 className="text-xl font-bold mb-2">Shankhadeep Das</h3>
               <p className="text-gray-400 mb-3">Community Manager</p>
               <div className="flex justify-center gap-4 text-gray-400">
-                <a href="#" className="hover:text-indigo-400"><FaLinkedin /></a>
-                <a href="#" className="hover:text-indigo-400"><FaTwitter /></a>
+                <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-400"><FaLinkedin /></a>
+                <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-400"><FaTwitter /></a>
               </div>
             </div>
           </div>

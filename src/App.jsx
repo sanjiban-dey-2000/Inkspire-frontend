@@ -7,6 +7,7 @@ import PublicLayout from './components/Layout/PublicLayout';
 import Home from './pages/Home';
 import Blog from './pages/Blog';
 import About from './pages/About';
+import Contact from './pages/Contact';
 
 const App = () => {
 
@@ -26,6 +27,10 @@ const App = () => {
         {
           path:"/about",
           element: <About/>
+        },
+        {
+          path:"/contact",
+          element: <Contact/>
         }
       ]
     }
