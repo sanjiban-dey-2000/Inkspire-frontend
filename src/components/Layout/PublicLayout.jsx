@@ -7,7 +7,7 @@ const PublicLayout = () => {
   return (
     <>
       <PublicHeader />
-      <div className="pt-16">
+      <div>
         <Outlet />
       </div>
       <PublicFooter/>
