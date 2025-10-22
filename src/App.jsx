@@ -9,6 +9,7 @@ import Blog from './pages/Blog';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 const App = () => {
 
@@ -36,6 +37,10 @@ const App = () => {
         {
           path:"/login",
           element:<Login/>
+        },
+        {
+          path:"/signup",
+          element: <Signup/>
         }
       ]
     }
