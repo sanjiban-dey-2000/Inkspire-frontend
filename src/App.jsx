@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import Blog from './pages/Blog';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Login from './pages/Login';
 
 const App = () => {
 
@@ -31,6 +32,10 @@ const App = () => {
         {
           path:"/contact",
           element: <Contact/>
+        },
+        {
+          path:"/login",
+          element:<Login/>
         }
       ]
     }

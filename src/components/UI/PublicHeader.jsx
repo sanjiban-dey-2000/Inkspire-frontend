@@ -46,7 +46,7 @@ const PublicHeader = () => {
           {/* Write Button */}
           <div className="hidden md:flex items-center">
             <Link
-              to="/write"
+              to="/login"
               className="px-5 py-2 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold shadow-md hover:shadow-lg hover:scale-[1.03] transition"
             >
               ✍️ Write
