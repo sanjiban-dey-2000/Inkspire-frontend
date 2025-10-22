@@ -83,7 +83,7 @@ const PublicHeader = () => {
           ))}
 
           <Link
-            to="/write"
+            to="/login"
             onClick={() => setOpen(false)}
             className="block text-center px-5 py-2 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold hover:scale-[1.03] transition"
           >
