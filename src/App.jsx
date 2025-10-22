@@ -6,6 +6,7 @@ import {
 import PublicLayout from './components/Layout/PublicLayout';
 import Home from './pages/Home';
 import Blog from './pages/Blog';
+import About from './pages/About';
 
 const App = () => {
 
@@ -21,8 +22,11 @@ const App = () => {
         {
           path:"/blogs",
           element:<Blog/>
+        },
+        {
+          path:"/about",
+          element: <About/>
         }
-
       ]
     }
   ]);
