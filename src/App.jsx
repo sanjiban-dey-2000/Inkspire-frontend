@@ -55,7 +55,7 @@ const App = () => {
       ),
       children:[
         {
-          path:"/dashboard",
+          path:"dashboard",
           
         }
       ]
