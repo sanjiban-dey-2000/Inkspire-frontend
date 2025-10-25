@@ -1,23 +1,44 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { signup } from "../services/AxiosInstance";
+import toast from "react-hot-toast";
+
 
 const Signup = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [warning,setWarning]=useState("");
+  const [signupData,setSignupData]=useState({
+    username:"",
+    password:"",
+    email:"",
+  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (password !== confirmPassword) {
-      alert("Passwords do not match!");
-      return;
+  const handleFormChange=(e)=>{
+    setSignupData({...signupData,[e.target.name]:e.target.value});
+  }
+
+  const postSignupData=async(singupData)=>{
+    try{
+      const res=await signup(singupData);
+      console.log(res.data);
+      toast.success("Signup is successful");
+    }catch(error){
+      console.log(error.message);
+      toast.error("Something went wrong!! Please try again.");
     }
-    alert(`Account created for: ${name} (${email})`);
-    setName("");
-    setEmail("");
-    setPassword("");
-    setConfirmPassword("");
-  };
+  }
+
+  useEffect(()=>{
+    if(confirmPassword && signupData.password!==confirmPassword){
+      setWarning("Password doesn't match");
+    }else{
+      setWarning("");
+    }
+  },[signupData.password,confirmPassword]);
+
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    postSignupData(signupData);
+  }
 
   return (
     <div className="min-h-screen flex bg-gradient-to-b from-gray-900 via-gray-800 to-gray-700">
@@ -50,27 +71,33 @@ const Signup = () => {
             <input
               type="text"
               placeholder="Full Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              name="username"
+              value={signupData.username}
+              onChange={handleFormChange}
               required
               className="w-full px-5 py-3 rounded-xl bg-gray-700 border border-gray-600 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
             />
             <input
               type="email"
               placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={signupData.email}
+              name="email"
+              onChange={handleFormChange}
               required
               className="w-full px-5 py-3 rounded-xl bg-gray-700 border border-gray-600 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
             />
             <input
               type="password"
               placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              name="password"
+              value={signupData.password}
+              onChange={handleFormChange}
               required
               className="w-full px-5 py-3 rounded-xl bg-gray-700 border border-gray-600 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
             />
+            {
+              warning && <p style={{ color: "red" }}>{warning}</p>
+            }
             <input
               type="password"
               placeholder="Confirm Password"
