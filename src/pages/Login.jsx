@@ -1,15 +1,43 @@
 import React, { useState } from "react";
+import { login } from "../services/AxiosInstance";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [loginData,setLoginData]=useState({
+    email:"",
+    password:"",
+  });
 
-  const handleSubmit = (e) => {
+  const navigate=useNavigate();
+
+  const handleFormChange=(e)=>{
+    setLoginData({...loginData,[e.target.name]:e.target.value});
+  }
+
+  const postLogin=async(data)=>{
+    try{
+      const res=await login(data);
+      console.log(res.data);
+      localStorage.setItem(res.data?.token);
+      localStorage.setItem(res.data?.id);
+      navigate("/dashboard");
+      toast.success("Login successful");
+    }catch(error){
+      console.log(error.message);
+      toast.error("Something went wrong!! Please try again");
+    }
+  }
+
+  const handleSubmit=(e)=>{
     e.preventDefault();
-    alert(`Logged in with email: ${email}`);
-    setEmail("");
-    setPassword("");
-  };
+    postLogin(loginData);
+    setLoginData({
+      email:"",
+      password:"",
+    });
+  }
+  
 
   return (
     <div className="min-h-screen flex bg-gradient-to-b from-gray-900 via-gray-800 to-gray-700">
@@ -43,16 +71,18 @@ const Login = () => {
             <input
               type="email"
               placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              name="email"
+              value={loginData.email}
+              onChange={handleFormChange}
               required
               className="w-full px-5 py-3 rounded-xl bg-gray-700 border border-gray-600 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
             />
             <input
               type="password"
               placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              name="password"
+              value={loginData.password}
+              onChange={handleFormChange}
               required
               className="w-full px-5 py-3 rounded-xl bg-gray-700 border border-gray-600 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
             />
