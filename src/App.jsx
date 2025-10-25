@@ -10,6 +10,8 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import PrivateRoute from './config/PrivateRoute';
+import PrivateLayout from './components/Layout/PrivateLayout';
 
 const App = () => {
 
@@ -41,6 +43,20 @@ const App = () => {
         {
           path:"/signup",
           element: <Signup/>
+        }
+      ]
+    },
+    {
+      path:"/private",
+      element:(
+        <PrivateRoute>
+          <PrivateLayout/>
+        </PrivateRoute>
+      ),
+      children:[
+        {
+          path:"/dashboard",
+          
         }
       ]
     }

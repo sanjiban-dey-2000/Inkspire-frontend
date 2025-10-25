@@ -19,8 +19,8 @@ const Login = () => {
     try{
       const res=await login(data);
       console.log(res.data);
-      localStorage.setItem(res.data?.token);
-      localStorage.setItem(res.data?.id);
+      localStorage.setItem("token",res.data?.token);
+      localStorage.setItem("id",res.data?.id);
       navigate("/dashboard");
       toast.success("Login successful");
     }catch(error){
