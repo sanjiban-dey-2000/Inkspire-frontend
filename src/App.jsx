@@ -13,6 +13,7 @@ import Signup from './pages/Signup';
 import PrivateRoute from './config/PrivateRoute';
 import PrivateLayout from './components/Layout/PrivateLayout';
 import Dashboard from './pages/Dashboard';
+import News from './pages/News';
 
 const App = () => {
 
@@ -59,6 +60,10 @@ const App = () => {
           path:"dashboard",
           element: <Dashboard/>
         },
+        {
+          path:"news",
+          element:<News/>
+        }
       ]
     }
   ]);
