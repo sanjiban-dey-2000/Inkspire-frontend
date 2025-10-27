@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import PrivateRoute from './config/PrivateRoute';
 import PrivateLayout from './components/Layout/PrivateLayout';
+import Dashboard from './pages/Dashboard';
 
 const App = () => {
 
@@ -56,8 +57,8 @@ const App = () => {
       children:[
         {
           path:"dashboard",
-          
-        }
+          element: <Dashboard/>
+        },
       ]
     }
   ]);
