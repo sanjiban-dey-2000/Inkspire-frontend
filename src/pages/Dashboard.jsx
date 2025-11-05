@@ -1,48 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaSearch, FaHeart, FaRegClock, FaUser } from "react-icons/fa";
 import { motion } from "framer-motion";
+import toast from "react-hot-toast";
+import { allBlogs } from "../services/AxiosInstance";
+import { formatDistanceToNow } from "date-fns";
 
 const Dashboard = () => {
   const [search, setSearch] = useState("");
+  const [posts, setPosts] = useState([]);
 
-  const posts = [
-    {
-      id: 1,
-      title: "Finding Creativity in Chaos",
-      author: "Sanjiban Dey",
-      time: "5 min read",
-      image:
-        "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800",
-      category: "Inspiration",
-    },
-    {
-      id: 2,
-      title: "The Power of Consistent Writing",
-      author: "Sanjiban Dey",
-      time: "6 min read",
-      image:
-        "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800",
-      category: "Productivity",
-    },
-    {
-      id: 3,
-      title: "Why Creativity Needs Solitude",
-      author: "Sanjiban Dey",
-      time: "4 min read",
-      image:
-        "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800",
-      category: "Mindset",
-    },
-    {
-      id: 4,
-      title: "Building Digital Empires with Words",
-      author: "Sanjiban Dey",
-      time: "7 min read",
-      image:
-        "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800",
-      category: "Writing",
-    },
-  ];
+  const getAllBlogs = async () => {
+    try {
+      const res = await allBlogs();
+      setPosts(res.data);
+    } catch (error) {
+      console.log(error.message);
+      toast.error("Something went wrong. Please try again!!!");
+    }
+  };
+
+  useEffect(() => {
+    getAllBlogs();
+  }, []);
 
   const filteredPosts = posts.filter((post) =>
     post.title.toLowerCase().includes(search.toLowerCase())
@@ -82,39 +61,59 @@ const Dashboard = () => {
         <h3 className="text-2xl font-semibold text-cyan-400 mb-6 text-center">
           Featured Posts
         </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredPosts.map((post, index) => (
-            <motion.div
-              key={post.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-gray-900/60 border border-gray-800 rounded-2xl overflow-hidden shadow-lg hover:border-cyan-500 hover:shadow-cyan-500/20 transition"
-            >
-              <img
-                src={post.image}
-                alt={post.title}
-                className="h-48 w-full object-cover"
-              />
-              <div className="p-5">
-                <span className="text-xs uppercase text-cyan-400 font-semibold">
-                  {post.category}
-                </span>
-                <h4 className="mt-2 text-lg font-semibold text-white">
-                  {post.title}
-                </h4>
-                <div className="flex items-center justify-between mt-3 text-sm text-gray-500">
-                  <span className="flex items-center gap-2">
-                    <FaUser /> {post.author}
+
+        {filteredPosts.length === 0 ? (
+          <p className="text-gray-500 text-center">No posts found.</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredPosts.map((post, index) => (
+              <motion.div
+                key={post.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-gray-900/60 border border-gray-800 rounded-2xl overflow-hidden shadow-lg hover:border-cyan-500 hover:shadow-cyan-500/20 transition"
+              >
+                <img
+                  src={post.imageUrl}
+                  alt={post.title}
+                  className="h-48 w-full object-cover"
+                />
+
+                <div className="p-5">
+                  <span className="text-xs uppercase text-cyan-400 font-semibold">
+                    {post.category || "General"}
                   </span>
-                  <span className="flex items-center gap-2">
-                    <FaRegClock /> {post.time}
-                  </span>
+
+                  <h4 className="mt-2 text-lg font-semibold text-white">
+                    {post.title}
+                  </h4>
+
+                  {/* Blog Preview */}
+                  <p className="text-gray-400 text-sm mt-2 line-clamp-3">
+                    {post.body?.length > 120
+                      ? post.body.slice(0, 120) + "..."
+                      : post.body || "No content available."}
+                  </p>
+
+                  {/* Footer Info */}
+                  <div className="flex items-center justify-between mt-4 text-sm text-gray-500">
+                    <span className="flex items-center gap-2">
+                      <FaUser className="text-cyan-400" />
+                      {post.user?.username || "Anonymous"}
+                    </span>
+                    <span className="flex items-center gap-2">
+                      <FaRegClock className="text-cyan-400" />
+                      {post.createdAt
+                        ? formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })
+                        : "Some time ago"}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
       </section>
     </div>
   );

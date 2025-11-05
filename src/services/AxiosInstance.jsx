@@ -21,3 +21,7 @@ export const signup=async (data)=>{
 export const login=async(data)=>{
     return await api.post("/auth/login",data);
 }
+
+export const allBlogs=async()=>{
+    return await api.get("/api/blogs/");
+}
