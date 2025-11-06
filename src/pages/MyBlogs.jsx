@@ -100,7 +100,7 @@ const MyBlogs = () => {
                   {/* Edit/Delete Buttons */}
                   <div className="flex justify-between mt-5">
                     <button
-                      onClick={() => navigate(`/edit-blog/${post.id}`)}
+                      onClick={() => navigate(`/private/edit-blog/${post.id}`)}
                       className="flex items-center gap-2 text-cyan-400 border border-cyan-400 px-3 py-1 rounded-lg text-sm hover:bg-cyan-400 hover:text-black transition"
                     >
                       <FaEdit /> Edit

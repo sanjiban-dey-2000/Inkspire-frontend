@@ -17,6 +17,7 @@ import News from './pages/News';
 import BlogDetails from './pages/BlogDetails';
 import MyBlogs from './pages/MyBlogs';
 import CreatePost from './pages/CreatePost';
+import BlogEdit from './pages/BlogEdit';
 
 const App = () => {
 
@@ -78,6 +79,10 @@ const App = () => {
         {
           path:"create",
           element: <CreatePost/>
+        },
+        {
+          path:"edit-blog/:id",
+          element: <BlogEdit/>
         }
       ]
     }

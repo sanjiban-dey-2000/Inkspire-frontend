@@ -45,3 +45,7 @@ export const createBlog=async(data)=>{
 export const searchBlogs=async(query)=>{
     return await api.get(`/api/blogs/search?q=${encodeURIComponent(query)}`);
 }
+
+export const updateBlogById=async(id,data)=>{
+    return await api.put(`/api/blog/${id}/update`,data);
+}
