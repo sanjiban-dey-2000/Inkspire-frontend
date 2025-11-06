@@ -37,3 +37,7 @@ export const getMyBlogs=async()=>{
 export const deleteBlogById=async(id)=>{
     return await api.delete(`/api/blog/${id}/remove`);
 }
+
+export const createBlog=async(data)=>{
+    return await api.post("/api/blog/add",data);
+}

@@ -16,6 +16,7 @@ import Dashboard from './pages/Dashboard';
 import News from './pages/News';
 import BlogDetails from './pages/BlogDetails';
 import MyBlogs from './pages/MyBlogs';
+import CreatePost from './pages/CreatePost';
 
 const App = () => {
 
@@ -73,6 +74,10 @@ const App = () => {
         {
           path:"my-posts",
           element: <MyBlogs/>
+        },
+        {
+          path:"create",
+          element: <CreatePost/>
         }
       ]
     }
