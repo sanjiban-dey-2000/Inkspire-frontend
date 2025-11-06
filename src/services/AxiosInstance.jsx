@@ -29,3 +29,11 @@ export const allBlogs=async()=>{
 export const getBlogById=async(id)=>{
     return await api.get(`/api/blog/${id}`);
 }
+
+export const getMyBlogs=async()=>{
+    return await api.get("/api/myblogs");
+}
+
+export const deleteBlogById=async(id)=>{
+    return await api.delete(`/api/blog/${id}/remove`);
+}

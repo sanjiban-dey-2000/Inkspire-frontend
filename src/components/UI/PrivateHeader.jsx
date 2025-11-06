@@ -21,7 +21,7 @@ const PrivateHeader = () => {
   // ✅ Added News to navigation items
   const navItems = [
     { name: "Dashboard", path: "/private/dashboard" },
-    { name: "My Posts", path: "private/my-posts" },
+    { name: "My Posts", path: "/private/my-posts" },
     { name: "Create", path: "/private/create" },
     { name: "News", path: "/private/news" }, // ✅ Added
   ];

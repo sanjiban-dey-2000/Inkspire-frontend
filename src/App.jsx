@@ -15,6 +15,7 @@ import PrivateLayout from './components/Layout/PrivateLayout';
 import Dashboard from './pages/Dashboard';
 import News from './pages/News';
 import BlogDetails from './pages/BlogDetails';
+import MyBlogs from './pages/MyBlogs';
 
 const App = () => {
 
@@ -68,6 +69,10 @@ const App = () => {
         {
           path:"blog/:id",
           element:<BlogDetails/>
+        },
+        {
+          path:"my-posts",
+          element: <MyBlogs/>
         }
       ]
     }
