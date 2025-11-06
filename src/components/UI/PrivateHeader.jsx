@@ -1,11 +1,20 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FiMenu, FiX, FiUser, FiLogOut } from "react-icons/fi";
+import toast from "react-hot-toast";
 
 const PrivateHeader = () => {
   const [open, setOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
+  const navigate = useNavigate();
+
+  // ✅ Logout function (for localStorage token)
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // clear stored token
+    toast.success("Logged out successfully!");
+    navigate("/login"); // redirect to login
+  };
 
   // Close profile menu if clicked outside
   useEffect(() => {
@@ -18,12 +27,11 @@ const PrivateHeader = () => {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  // ✅ Added News to navigation items
   const navItems = [
     { name: "Dashboard", path: "/private/dashboard" },
     { name: "My Posts", path: "/private/my-posts" },
     { name: "Create", path: "/private/create" },
-    { name: "News", path: "/private/news" }, // ✅ Added
+    { name: "News", path: "/private/news" },
   ];
 
   return (
@@ -32,7 +40,7 @@ const PrivateHeader = () => {
         <div className="flex justify-between items-center py-3">
           {/* Brand Logo */}
           <Link
-            to="/dashboard"
+            to="/private/dashboard"
             className="flex items-center space-x-2 text-2xl font-extrabold tracking-tight group"
           >
             <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
@@ -77,7 +85,7 @@ const PrivateHeader = () => {
                   My Profile
                 </Link>
                 <button
-                  onClick={() => alert("Logging out...")}
+                  onClick={handleLogout}
                   className="w-full text-left px-4 py-2 flex items-center space-x-2 text-red-600 hover:bg-red-50 dark:hover:bg-gray-700 transition"
                 >
                   <FiLogOut />
@@ -114,7 +122,7 @@ const PrivateHeader = () => {
           {/* Logout Button in Mobile View */}
           <button
             onClick={() => {
-              alert("Logging out...");
+              handleLogout();
               setOpen(false);
             }}
             className="block w-full text-center px-5 py-2 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold hover:scale-[1.03] transition"
