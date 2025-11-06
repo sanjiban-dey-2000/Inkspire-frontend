@@ -25,3 +25,7 @@ export const login=async(data)=>{
 export const allBlogs=async()=>{
     return await api.get("/api/blogs/");
 }
+
+export const getBlogById=async(id)=>{
+    return await api.get(`/api/blog/${id}`);
+}

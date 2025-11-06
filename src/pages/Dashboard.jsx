@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { FaSearch, FaHeart, FaRegClock, FaUser } from "react-icons/fa";
+import { FaSearch, FaRegClock, FaUser } from "react-icons/fa";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import { allBlogs } from "../services/AxiosInstance";
 import { formatDistanceToNow } from "date-fns";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const [search, setSearch] = useState("");
@@ -72,44 +73,48 @@ const Dashboard = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-gray-900/60 border border-gray-800 rounded-2xl overflow-hidden shadow-lg hover:border-cyan-500 hover:shadow-cyan-500/20 transition"
               >
-                <img
-                  src={post.imageUrl}
-                  alt={post.title}
-                  className="h-48 w-full object-cover"
-                />
+                <Link
+                  to={`/private/blog/${post.id}`}
+                  className="block bg-gray-900/60 border border-gray-800 rounded-2xl overflow-hidden shadow-lg hover:border-cyan-500 hover:shadow-cyan-500/20 transition"
+                >
+                  <img
+                    src={post.imageUrl}
+                    alt={post.title}
+                    className="h-48 w-full object-cover"
+                  />
 
-                <div className="p-5">
-                  <span className="text-xs uppercase text-cyan-400 font-semibold">
-                    {post.category || "General"}
-                  </span>
-
-                  <h4 className="mt-2 text-lg font-semibold text-white">
-                    {post.title}
-                  </h4>
-
-                  {/* Blog Preview */}
-                  <p className="text-gray-400 text-sm mt-2 line-clamp-3">
-                    {post.body?.length > 120
-                      ? post.body.slice(0, 120) + "..."
-                      : post.body || "No content available."}
-                  </p>
-
-                  {/* Footer Info */}
-                  <div className="flex items-center justify-between mt-4 text-sm text-gray-500">
-                    <span className="flex items-center gap-2">
-                      <FaUser className="text-cyan-400" />
-                      {post.user?.username || "Anonymous"}
+                  <div className="p-5">
+                    <span className="text-xs uppercase text-cyan-400 font-semibold">
+                      {post.category || "General"}
                     </span>
-                    <span className="flex items-center gap-2">
-                      <FaRegClock className="text-cyan-400" />
-                      {post.createdAt
-                        ? formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })
-                        : "Some time ago"}
-                    </span>
+
+                    <h4 className="mt-2 text-lg font-semibold text-white">
+                      {post.title}
+                    </h4>
+
+                    <p className="text-gray-400 text-sm mt-2 line-clamp-3">
+                      {post.body?.length > 120
+                        ? post.body.slice(0, 120) + "..."
+                        : post.body || "No content available."}
+                    </p>
+
+                    <div className="flex items-center justify-between mt-4 text-sm text-gray-500">
+                      <span className="flex items-center gap-2">
+                        <FaUser className="text-cyan-400" />
+                        {post.user?.username || "Anonymous"}
+                      </span>
+                      <span className="flex items-center gap-2">
+                        <FaRegClock className="text-cyan-400" />
+                        {post.createdAt
+                          ? formatDistanceToNow(new Date(post.createdAt), {
+                              addSuffix: true,
+                            })
+                          : "Some time ago"}
+                      </span>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </motion.div>
             ))}
           </div>

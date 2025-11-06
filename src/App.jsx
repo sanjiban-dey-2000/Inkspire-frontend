@@ -14,6 +14,7 @@ import PrivateRoute from './config/PrivateRoute';
 import PrivateLayout from './components/Layout/PrivateLayout';
 import Dashboard from './pages/Dashboard';
 import News from './pages/News';
+import BlogDetails from './pages/BlogDetails';
 
 const App = () => {
 
@@ -63,6 +64,10 @@ const App = () => {
         {
           path:"news",
           element:<News/>
+        },
+        {
+          path:"blog/:id",
+          element:<BlogDetails/>
         }
       ]
     }
