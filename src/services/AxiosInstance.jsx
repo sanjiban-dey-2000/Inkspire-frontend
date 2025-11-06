@@ -41,3 +41,7 @@ export const deleteBlogById=async(id)=>{
 export const createBlog=async(data)=>{
     return await api.post("/api/blog/add",data);
 }
+
+export const searchBlogs=async(query)=>{
+    return await api.get(`/api/blogs/search?q=${encodeURIComponent(query)}`);
+}
