@@ -20,7 +20,7 @@ const News = () => {
   useEffect(() => {
     const fetchAllCategories = async () => {
       try {
-        const apiKey = "BPONVz6NioIhZXPwHI0p5YyGk0urHJNalajrG0Z8"; // ✅ your token
+        const apiKey = import.meta.env.VITE_NEWS_API_KEY; // ✅ your token
         const baseUrl = "https://api.thenewsapi.com/v1/news/top";
 
         const promises = categories.map((category) =>

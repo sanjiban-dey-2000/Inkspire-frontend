@@ -18,6 +18,7 @@ import BlogDetails from './pages/BlogDetails';
 import MyBlogs from './pages/MyBlogs';
 import CreatePost from './pages/CreatePost';
 import BlogEdit from './pages/BlogEdit';
+import ErrorPage from './pages/ErrorPage';
 
 const App = () => {
 
@@ -25,6 +26,7 @@ const App = () => {
     {
       path:"/",
       element: <PublicLayout/>,
+      errorElement:<ErrorPage/>,
       children:[
         {
           path:"/",
@@ -59,6 +61,7 @@ const App = () => {
           <PrivateLayout/>
         </PrivateRoute>
       ),
+      errorElement:<ErrorPage/>,
       children:[
         {
           path:"dashboard",
@@ -83,6 +86,10 @@ const App = () => {
         {
           path:"edit-blog/:id",
           element: <BlogEdit/>
+        },
+        {
+          path:"*",
+          element:<ErrorPage/>
         }
       ]
     }
